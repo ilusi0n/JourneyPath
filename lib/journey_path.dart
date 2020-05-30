@@ -7,22 +7,22 @@ import 'package:quiver/strings.dart';
 import 'models/models.dart';
 
 class JourneyPath extends StatelessWidget {
-  final double connectedDotSize = 24.0;
-  final Timeline timeline;
-  final ConnectedDot connectedDot;
-  final ConnectedLine connectedLine;
-  final InformationCard listInformationCard;
   const JourneyPath({
     @required this.timeline,
     @required this.connectedDot,
     @required this.connectedLine,
     @required this.listInformationCard,
   });
+  double get connectedDotSize => 24.0;
+  final Timeline timeline;
+  final ConnectedDot connectedDot;
+  final ConnectedLine connectedLine;
+  final InformationCard listInformationCard;
   @override
   Widget build(BuildContext context) {
-    List<_DotModel> listConnectedDots = _createListDotModel(connectedDot);
+    final List<_DotModel> listConnectedDots = _createListDotModel(connectedDot);
     final double screenHalfWidth = MediaQuery.of(context).size.width / 2;
-    List<_ConnectedLineModel> listConnectedLine = _createConnectLine(
+    final List<_ConnectedLineModel> listConnectedLine = _createConnectLine(
       connectedLine,
       listConnectedDots,
       connectedDot.number,
@@ -52,8 +52,8 @@ class JourneyPath extends StatelessWidget {
   }
 
   List<_DotModel> _createListDotModel(ConnectedDot connectedDot) {
-    List<_DotModel> listDotModel = List<_DotModel>();
-    var index = 1.0;
+    final List<_DotModel> listDotModel = <_DotModel>[];
+    double index = 1.0;
     listDotModel.add(
       _DotModel(
         color: connectedDot.edgeColor,
@@ -62,7 +62,7 @@ class JourneyPath extends StatelessWidget {
       ),
     );
 
-    for (var i = 0; i < connectedDot.number; i++) {
+    for (int i = 0; i < connectedDot.number; i++) {
       listDotModel.add(
         _DotModel(
           color: connectedDot.middleColorDots,
@@ -94,9 +94,9 @@ class JourneyPath extends StatelessWidget {
 
   List<_ConnectedLineModel> _createConnectLine(ConnectedLine connectedLine,
       List<_DotModel> listConnectedDot, int size, double screenHalfWidth) {
-    List<_ConnectedLineModel> listConnectedline = List<_ConnectedLineModel>();
-    for (var i = 0; i < size; i++) {
-      bool isLeft = i % 2 == 0;
+    final List<_ConnectedLineModel> listConnectedline = <_ConnectedLineModel>[];
+    for (int i = 0; i < size; i++) {
+      final bool isLeft = i % 2 == 0;
       listConnectedline.add(
         _ConnectedLineModel(
           color: connectedLine.color,
@@ -116,11 +116,11 @@ class JourneyPath extends StatelessWidget {
     double screenHalfWidth,
     List<_ConnectedLineModel> listConnectedLine,
   ) {
-    List<Widget> _list = <Widget>[];
+    final List<Widget> _list = <Widget>[];
     Widget card;
-    var index = 0;
+    int index = 0;
 
-    for (var info in listInformationCard.list) {
+    for (final InformationCardDetails info in listInformationCard.list) {
       card = Positioned(
         right: listConnectedLine.elementAt(index).isLeft
             ? screenHalfWidth -
@@ -144,9 +144,10 @@ class JourneyPath extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(info.name),
-                isBlank(info.description)
-                    ? Container()
-                    : Text(info.description),
+                if (isBlank(info.description))
+                  Container()
+                else
+                  Text(info.description),
               ],
             ),
           ),
@@ -160,12 +161,6 @@ class JourneyPath extends StatelessWidget {
 }
 
 class _ConnectedLineModel {
-  final double size;
-  final Color color;
-  final double top;
-  final double right;
-  final bool isLeft;
-
   const _ConnectedLineModel({
     @required this.size,
     @required this.color,
@@ -173,6 +168,11 @@ class _ConnectedLineModel {
     @required this.right,
     @required this.isLeft,
   });
+  final double size;
+  final Color color;
+  final double top;
+  final double right;
+  final bool isLeft;
 }
 
 Widget _buildConnectedLine(_ConnectedLineModel connectedLine) {
@@ -193,15 +193,14 @@ Widget _buildConnectedLine(_ConnectedLineModel connectedLine) {
 }
 
 class _DotModel {
-  final double top;
-  final double size;
-  final Color color;
-
   const _DotModel({
     @required this.color,
     @required this.size,
     @required this.top,
   });
+  final double top;
+  final double size;
+  final Color color;
 }
 
 Widget _buildConnectedDots(_DotModel dotModel) {
@@ -228,12 +227,13 @@ Widget _buildConnectedDots(_DotModel dotModel) {
 }
 
 class _Buildtimeline extends StatelessWidget {
-  final Timeline timeline;
-  final double size;
   const _Buildtimeline({
     @required this.timeline,
     @required this.size,
   });
+  final Timeline timeline;
+  final double size;
+
   @override
   Widget build(BuildContext context) {
     return Column(
