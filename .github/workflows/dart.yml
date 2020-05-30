@@ -16,14 +16,5 @@ jobs:
           flutter-version: 1.12.13+hotfix.8
           channel: "stable"
 
-      # Get flutter packages
-      - run: flutter pub get
-
-      # Build :D
-      - run: flutter build aot
-
       # Analyze our Dart code
       - run: flutter analyze
-
-      # Run our tests
-      - run: flutter test --coverage
