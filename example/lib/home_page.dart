@@ -5,12 +5,12 @@ import 'package:journey_path/models/models.dart';
 import 'package:journey_path/models/timeline.dart';
 
 class HomePage extends StatelessWidget {
-  final timeline = Timeline(
+  final Timeline timeline = Timeline(
     color: Colors.red,
     thickness: 2.0,
   );
 
-  final connectedDot = ConnectedDot(
+  final ConnectedDot connectedDot = ConnectedDot(
     number: 4,
     edgeColor: Colors.red,
     spaceBetween: 150.0,
@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
     middleColorDots: Colors.blue,
   );
 
-  final connectedLine = ConnectedLine(
+  final ConnectedLine connectedLine = ConnectedLine(
     size: 30,
     color: Colors.red,
   );
@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Journey Path'),
+        title: const Text('Journey Path'),
       ),
       body: Center(
         child: Container(
