@@ -6,7 +6,7 @@ import 'package:journey_path/models/timeline.dart';
 
 class HomePage extends StatelessWidget {
   final Timeline timeline = Timeline(
-    color: Colors.red,
+    color: Colors.grey,
     thickness: 2.0,
   );
 
@@ -15,16 +15,16 @@ class HomePage extends StatelessWidget {
     edgeColor: Colors.red,
     spaceBetween: 150.0,
     edgeSize: 70,
-    middleColorDots: Colors.blue,
+    middleColorDots: Colors.green,
   );
 
   final ConnectedLine connectedLine = ConnectedLine(
     size: 30,
-    color: Colors.red,
+    color: Colors.grey,
   );
 
   final InformationCard informationCard =
-      InformationCard(height: 60, width: 120, list: [
+      InformationCard(height: 60, width: 120, color: Colors.blue[100], list: [
     InformationCardDetails(name: 'name1', description: 'description1'),
     InformationCardDetails(name: 'name2', description: 'description2'),
     InformationCardDetails(name: 'name3', description: 'description3'),

@@ -131,7 +131,7 @@ class JourneyPath extends StatelessWidget {
             (listInformationCard.height / 2),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.blue[100],
+            color: listInformationCard.color,
             borderRadius: const BorderRadius.all(
               Radius.circular(16.0),
             ),
