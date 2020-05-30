@@ -2,7 +2,6 @@ library journey_path;
 
 import 'package:flutter/material.dart';
 import 'package:journey_path/models/connected_line.dart';
-import 'package:quiver/strings.dart';
 
 import 'models/models.dart';
 
@@ -144,7 +143,7 @@ class JourneyPath extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(info.name),
-                if (isBlank(info.description))
+                if (info.description == null)
                   Container()
                 else
                   Text(info.description),
