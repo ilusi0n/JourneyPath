@@ -22,6 +22,34 @@ class HomePage extends StatelessWidget {
     size: 30,
     color: Colors.red,
   );
+
+  final listInformationCard = <InformationCard>[
+    InformationCard(
+      name: 'name1',
+      description: 'description1',
+      height: 90,
+      width: 140,
+    ),
+    InformationCard(
+      name: 'name2',
+      description: 'description2',
+      height: 90,
+      width: 140,
+    ),
+    InformationCard(
+      name: 'name3',
+      description: 'description3',
+      height: 90,
+      width: 140,
+    ),
+    InformationCard(
+      name: 'name4',
+      description: 'description4',
+      height: 90,
+      width: 140,
+    )
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +62,7 @@ class HomePage extends StatelessWidget {
             timeline: timeline,
             connectedDot: connectedDot,
             connectedLine: connectedLine,
+            listInformationCard: listInformationCard,
           ),
         ),
       ),

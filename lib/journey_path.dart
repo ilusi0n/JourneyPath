@@ -10,10 +10,12 @@ class JourneyPath extends StatelessWidget {
   final Timeline timeline;
   final ConnectedDot connectedDot;
   final ConnectedLine connectedLine;
+  final List<InformationCard> listInformationCard;
   const JourneyPath({
     @required this.timeline,
     @required this.connectedDot,
     @required this.connectedLine,
+    @required this.listInformationCard,
   });
   @override
   Widget build(BuildContext context) {
@@ -29,18 +31,21 @@ class JourneyPath extends StatelessWidget {
     return SafeArea(
       child: SingleChildScrollView(
         child: Container(
-            width: double.infinity,
-            child: Stack(
-              alignment: Alignment.center,
-              children: <Widget>[
-                _Buildtimeline(
-                  timeline: timeline,
-                  size: _getTimelineHeight(connectedDot),
-                ),
-                ...listConnectedLine.map(_buildConnectedLine),
-                ...listConnectedDots.map(_buildConnectedDots),
-              ],
-            )),
+          width: double.infinity,
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              _Buildtimeline(
+                timeline: timeline,
+                size: _getTimelineHeight(connectedDot),
+              ),
+              ...listConnectedLine.map(_buildConnectedLine),
+              ...listConnectedDots.map(_buildConnectedDots),
+              ..._buildInformationCard(
+                  listInformationCard, screenHalfWidth, listConnectedLine),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -98,10 +103,56 @@ class JourneyPath extends StatelessWidget {
           top: listConnectedDot.elementAt(i + 1).top + (connectedDotSize / 2),
           right:
               isLeft ? screenHalfWidth - connectedLine.size : screenHalfWidth,
+          isLeft: isLeft,
         ),
       );
     }
     return listConnectedline;
+  }
+
+  List<Widget> _buildInformationCard(
+    List<InformationCard> listInformationCard,
+    double screenHalfWidth,
+    List<_ConnectedLineModel> listConnectedLine,
+  ) {
+    List<Widget> _list = <Widget>[];
+    Widget card;
+    var index = 0;
+
+    for (var info in listInformationCard) {
+      card = Positioned(
+        right: listConnectedLine.elementAt(index).isLeft
+            ? screenHalfWidth -
+                (info.width + listConnectedLine.elementAt(index).size)
+            : screenHalfWidth + listConnectedLine.elementAt(index).size,
+        top: listConnectedLine.elementAt(index).top +
+            (connectedDotSize / 2) -
+            (info.height / 2),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.blue[100],
+            borderRadius: const BorderRadius.all(
+              Radius.circular(16.0),
+            ),
+          ),
+          width: info.width,
+          height: info.height,
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(info.name),
+                Text(info.description ?? ''),
+              ],
+            ),
+          ),
+        ),
+      );
+      _list.add(card);
+      index++;
+    }
+    return _list;
   }
 }
 
@@ -110,12 +161,14 @@ class _ConnectedLineModel {
   final Color color;
   final double top;
   final double right;
+  final bool isLeft;
 
   const _ConnectedLineModel({
     @required this.size,
     @required this.color,
     @required this.top,
     @required this.right,
+    @required this.isLeft,
   });
 }
 
