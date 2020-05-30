@@ -125,9 +125,7 @@ class JourneyPath extends StatelessWidget {
             ? screenHalfWidth -
                 (info.width + listConnectedLine.elementAt(index).size)
             : screenHalfWidth + listConnectedLine.elementAt(index).size,
-        top: listConnectedLine.elementAt(index).top +
-            (connectedDotSize / 2) -
-            (info.height / 2),
+        top: listConnectedLine.elementAt(index).top - (info.height / 2),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.blue[100],
