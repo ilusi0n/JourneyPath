@@ -2,6 +2,7 @@ library journey_path;
 
 import 'package:flutter/material.dart';
 import 'package:journey_path/models/connected_line.dart';
+import 'package:quiver/strings.dart';
 
 import 'models/models.dart';
 
@@ -10,7 +11,7 @@ class JourneyPath extends StatelessWidget {
   final Timeline timeline;
   final ConnectedDot connectedDot;
   final ConnectedLine connectedLine;
-  final List<InformationCard> listInformationCard;
+  final InformationCard listInformationCard;
   const JourneyPath({
     @required this.timeline,
     @required this.connectedDot,
@@ -111,7 +112,7 @@ class JourneyPath extends StatelessWidget {
   }
 
   List<Widget> _buildInformationCard(
-    List<InformationCard> listInformationCard,
+    InformationCard listInformationCard,
     double screenHalfWidth,
     List<_ConnectedLineModel> listConnectedLine,
   ) {
@@ -119,13 +120,15 @@ class JourneyPath extends StatelessWidget {
     Widget card;
     var index = 0;
 
-    for (var info in listInformationCard) {
+    for (var info in listInformationCard.list) {
       card = Positioned(
         right: listConnectedLine.elementAt(index).isLeft
             ? screenHalfWidth -
-                (info.width + listConnectedLine.elementAt(index).size)
+                (listInformationCard.width +
+                    listConnectedLine.elementAt(index).size)
             : screenHalfWidth + listConnectedLine.elementAt(index).size,
-        top: listConnectedLine.elementAt(index).top - (info.height / 2),
+        top: listConnectedLine.elementAt(index).top -
+            (listInformationCard.height / 2),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.blue[100],
@@ -133,15 +136,17 @@ class JourneyPath extends StatelessWidget {
               Radius.circular(16.0),
             ),
           ),
-          width: info.width,
-          height: info.height,
+          width: listInformationCard.width,
+          height: listInformationCard.height,
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(info.name),
-                Text(info.description ?? ''),
+                isBlank(info.description)
+                    ? Container()
+                    : Text(info.description),
               ],
             ),
           ),

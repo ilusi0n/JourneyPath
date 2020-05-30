@@ -23,32 +23,13 @@ class HomePage extends StatelessWidget {
     color: Colors.red,
   );
 
-  final listInformationCard = <InformationCard>[
-    InformationCard(
-      name: 'name1',
-      description: 'description1',
-      height: 90,
-      width: 140,
-    ),
-    InformationCard(
-      name: 'name2',
-      description: 'description2',
-      height: 90,
-      width: 140,
-    ),
-    InformationCard(
-      name: 'name3',
-      description: 'description3',
-      height: 90,
-      width: 140,
-    ),
-    InformationCard(
-      name: 'name4',
-      description: 'description4',
-      height: 90,
-      width: 140,
-    )
-  ];
+  final InformationCard informationCard =
+      InformationCard(height: 60, width: 120, list: [
+    InformationCardDetails(name: 'name1', description: 'description1'),
+    InformationCardDetails(name: 'name2', description: 'description2'),
+    InformationCardDetails(name: 'name3', description: 'description3'),
+    InformationCardDetails(name: 'name4', description: 'description4'),
+  ]);
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +43,7 @@ class HomePage extends StatelessWidget {
             timeline: timeline,
             connectedDot: connectedDot,
             connectedLine: connectedLine,
-            listInformationCard: listInformationCard,
+            listInformationCard: informationCard,
           ),
         ),
       ),
