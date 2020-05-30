@@ -1,5 +1,5 @@
 name: journey_path
-description: A new Flutter package project.
+description: A flutter package that draws a simple journey path with informational cards.
 version: 1.0.0
 author: Hugo Cabrita
 homepage: https://github.com/ilusi0n
